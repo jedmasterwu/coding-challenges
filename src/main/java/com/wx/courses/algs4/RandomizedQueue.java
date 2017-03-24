@@ -24,7 +24,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         @Override
         public Item next() {
             if (!hasNext()) {
-                throw new NoSuchElementException("No more elements in the com.wx.courses.algs4.RandomizedQueue");
+                throw new NoSuchElementException("No more elements in the RandomizedQueue");
             }
             return mItems[indices[index++]];
         }

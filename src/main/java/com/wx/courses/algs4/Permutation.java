@@ -19,7 +19,7 @@ public class Permutation {
 
                 itemNumber++;
                 if (rq.size() == k) {
-                    // We have k items in our com.wx.courses.algs4.RandomizedQueue, but we still need to go through the rest of the list
+                    // We have k items in our RandomizedQueue, but we still need to go through the rest of the list
                     if (StdRandom.uniform(1, itemNumber + 1) <= k) {
                         rq.dequeue();
                         rq.enqueue(current);
