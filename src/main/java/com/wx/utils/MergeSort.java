@@ -25,7 +25,7 @@ public class MergeSort {
                 a[i] = aux[secondHalf++];
             } else if (secondHalf > hi) {
                 a[i] = aux[firstHalf++];
-            } else if (less(aux[secondHalf], aux[firstHalf])) {
+            } else if (SortHelper.less(aux[secondHalf], aux[firstHalf])) {
                 a[i] = aux[secondHalf++];
             } else {
                 a[i] = aux[firstHalf++];
@@ -43,7 +43,7 @@ public class MergeSort {
                 a[i] = aux[secondHalf++];
             } else if (secondHalf > hi) {
                 a[i] = aux[firstHalf++];
-            } else if (less(comparator, aux[secondHalf], aux[firstHalf])) {
+            } else if (SortHelper.less(comparator, aux[secondHalf], aux[firstHalf])) {
                 a[i] = aux[secondHalf++];
             } else {
                 a[i] = aux[firstHalf++];
@@ -58,7 +58,7 @@ public class MergeSort {
             sort(a, aux, mid + 1, hi);
 
             // If it's already sorted do nothing.
-            if (less(a[mid + 1], a[mid])) {
+            if (SortHelper.less(a[mid + 1], a[mid])) {
                 merge(a, aux, lo, mid, hi);
             }
         }
@@ -70,17 +70,9 @@ public class MergeSort {
             sort(a, aux, lo, mid, comparator);
             sort(a, aux, mid + 1, hi, comparator);
 
-            if (less(comparator, a[mid + 1], a[mid])) {
+            if (SortHelper.less(comparator, a[mid + 1], a[mid])) {
                 merge(a, aux, lo, mid, hi, comparator);
             }
         }
-    }
-
-    private static boolean less(Comparable a, Comparable b) {
-        return a.compareTo(b) < 0;
-    }
-
-    private static <T> boolean less(Comparator<? super T> comparator, T a, T b) {
-        return comparator.compare(a, b) < 0;
     }
 }
