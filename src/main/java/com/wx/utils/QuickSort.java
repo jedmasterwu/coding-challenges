@@ -1,22 +1,47 @@
 package com.wx.utils;
 
-import java.util.Comparator;
-
 public class QuickSort {
 
+    public static void qsort(Comparable[] array) {
+        // Shuffle is needed to avoid worst case
+        RandomHelper.shuffle(array);
+        qsort(array, 0, array.length - 1);
+    }
+
     public static void sort(Comparable[] array) {
+        // Shuffle is needed to avoid worst case
         RandomHelper.shuffle(array);
         sort(array, 0, array.length - 1);
     }
 
-    public static <T> void sort(T[] array, Comparator<? super T> comparator) {
-    }
-
-    private static void sort(Comparable[] array, int lo, int hi) {
+    private static void qsort(Comparable[] array, int lo, int hi) {
         if (lo < hi) {
             int j = partition(array, lo, hi);
             sort(array, lo, j - 1);
             sort(array, j + 1, hi);
+        }
+    }
+
+    private static void sort(Comparable[] array, int lo, int hi) {
+        if (lo < hi) {
+            int i = lo;
+            int lt = lo;
+            int gt = hi;
+            Comparable v = array[lo];
+
+            while (i <= gt) {
+                int cmp = array[i].compareTo(v);
+                if (cmp < 0) {
+                    SortHelper.exchange(array, lt++, i++);
+                } else if (cmp > 0) {
+                    SortHelper.exchange(array, gt--, i);
+                } else {
+                    i++;
+                }
+            }
+
+            sort(array, lo, lt - 1);
+            sort(array, gt + 1, hi);
         }
     }
 
