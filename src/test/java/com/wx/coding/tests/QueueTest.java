@@ -97,7 +97,6 @@ public class QueueTest {
         try {
             for (int i = 0; i < 100000000; i++) {
                 int operation = random.nextInt(4);
-//                System.out.println(String.format(" --------- i = %d, operation = %d ------------", i, operation));
                 switch (operation) {
                     case 0: // addFirst
                         deque.addFirst(i);
@@ -116,7 +115,6 @@ public class QueueTest {
                         try {
                             a = (operation == 2) ? deque.removeFirst() : deque.removeLast();
                         } catch (NoSuchElementException e) {
-//                            System.out.println("Remove while empty case");
                             empty = true;
                             AssertJUnit.assertTrue(deque.isEmpty() && deque.size() == 0);
                         }
@@ -126,17 +124,9 @@ public class QueueTest {
                         } catch (NoSuchElementException e) {
                             AssertJUnit.assertTrue(empty);
                             AssertJUnit.assertTrue(standard.isEmpty() && standard.size() == 0);
-//                            System.out.println("Remove while empty case passed");
                         }
 
                         if (!empty) {
-//                            System.out.println(
-//                                    String.format("Operation: %s - com.wx.courses.algs4.Deque: %d, LinkedList: %d",
-//                                            (operation == 2) ? "removeFirst" : "removeLast",
-//                                            a,
-//                                            b
-//                                    )
-//                            );
                             AssertJUnit.assertEquals(a, b);
                         }
                         break;
@@ -150,7 +140,7 @@ public class QueueTest {
                 AssertJUnit.assertEquals(dequeIter.next(), standardIter.next());
             }
         } catch (NullPointerException e) {
-
+            // Do nothing
         }
 
         System.out.println("Took: " + stopwatch.elapsedTime() + " seconds");
