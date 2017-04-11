@@ -29,7 +29,7 @@ public class BaseTest {
         }
 
         long max = UniquePaths.getPaths(100, 100);
-        logger.info("{} x {} --> {} ||||| Long.Max = {},  max < long.max {}", 100, 100, max, Long.MAX_VALUE, max <= Long.MAX_VALUE);
+        logger.info("{} x {} --> {} ||||| Long.Max = {},  max < long.max {}", 100, 100, max, Long.MAX_VALUE, max < Long.MAX_VALUE);
     }
 
     @Test

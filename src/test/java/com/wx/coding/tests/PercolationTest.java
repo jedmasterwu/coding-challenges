@@ -29,15 +29,6 @@ public class PercolationTest {
                         int col = scanner.nextInt();
                         i++;
                         percolation.open(row, col);
-//                        System.out.println(String.format(
-//                                "(%d, %d) should now be open: %b",
-//                                row, col, percolation.isOpen(row, col))
-//                        );
-//                        System.out.println(String.format(
-//                                "(%d, %d) should not be full: %b",
-//                                row, col, percolation.isFull(row, col))
-//                        );
-//                        System.out.println("==========================================");
                         System.out.println("Call #" + i + ": percolates() returns " + percolation.percolates());
                         System.out.println("Call #" + i + ": isFull() returns " + percolation.isFull(row, col));
                     } catch (NoSuchElementException e) {
