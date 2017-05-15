@@ -1,5 +1,8 @@
 package com.wx.utils;
 
+import java.util.Iterator;
+import java.util.Stack;
+
 public class BST<Key extends Comparable<Key>> {
 
     private class Node {
@@ -13,6 +16,37 @@ public class BST<Key extends Comparable<Key>> {
             count = 1;
             left = null;
             right = null;
+        }
+    }
+
+    private class BSTIterator implements Iterator<Node> {
+        Stack<Node> nodeStack = new Stack<>();
+
+        public BSTIterator(Node root) {
+            while (root != null) {
+                nodeStack.push(root);
+                root = root.left;
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !nodeStack.isEmpty();
+        }
+
+        @Override
+        public Node next() {
+            Node next = null;
+            if (!nodeStack.isEmpty()) {
+                next = nodeStack.pop();
+                Node toPush = next.right;
+                while(toPush != null) {
+                    nodeStack.push(toPush);
+                    toPush = toPush.left;
+                }
+            }
+
+            return next;
         }
     }
 
