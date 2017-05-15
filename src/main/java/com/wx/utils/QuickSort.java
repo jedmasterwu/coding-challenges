@@ -17,8 +17,8 @@ public class QuickSort {
     private static void qsort(Comparable[] array, int lo, int hi) {
         if (lo < hi) {
             int j = partition(array, lo, hi);
-            sort(array, lo, j - 1);
-            sort(array, j + 1, hi);
+            qsort(array, lo, j - 1);
+            qsort(array, j + 1, hi);
         }
     }
 
