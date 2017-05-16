@@ -2,11 +2,13 @@ package com.wx.coding.tests;
 
 import com.wx.coding.problems.WordSearch;
 import com.wx.utils.Trie;
+import edu.princeton.cs.algs4.Stopwatch;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Set;
 
 public class TrieTest {
 
@@ -66,10 +68,12 @@ public class TrieTest {
         };
 
         ArrayList<String> dictionary = new ArrayList<>();
+        Stopwatch stopwatch = new Stopwatch();
         Collections.addAll(dictionary, "dog", "dad", "dgdg", "can", "again");
 
         WordSearch ws = new WordSearch();
-        ArrayList<String> result = ws.wordSearchII(board, dictionary);
+        Set<String> result = ws.wordSearchII(board, dictionary);
+        System.out.println(stopwatch.elapsedTime());
         result.forEach(System.out::println);
     }
 }

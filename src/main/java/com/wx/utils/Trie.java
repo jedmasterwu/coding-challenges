@@ -4,35 +4,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Trie {
-
-    private static final char ROOT = (char) -1;
     public static final short NOT_FOUND = 0x0;
     public static final short IS_WORD = 0x1;
     public static final short IS_PREFIX = 0x2;
-    private static class TrieNode {
-        char c;
-        Map<Character, TrieNode> children;
-        boolean isLeaf;
 
-        TrieNode(char c) {
-            this.c = c;
+    public static class TrieNode {
+        private String word;
+        private Map<Character, TrieNode> children;
+
+        TrieNode() {
+            this.word = null;
             children = new HashMap<>();
-            this.isLeaf = false;
+        }
+
+        public TrieNode getChild(Character c) {
+            return children.get(c);
+        }
+
+        public String getWord() {
+            return this.word;
         }
     }
 
-    public static boolean isWord(short code) {
-        return (code & IS_WORD) == IS_WORD;
-    }
-
-    public static boolean isPrefix(short code) {
-        return (code & IS_PREFIX) == IS_PREFIX;
-    }
-
-    private TrieNode root;
+    private final TrieNode root;
 
     public Trie() {
-        root = new TrieNode(ROOT);
+        root = new TrieNode();
     }
 
     public void add(String str) {
@@ -42,12 +39,12 @@ public class Trie {
             char letter = str.charAt(i);
             TrieNode next = node.children.get(letter);
             if (next == null) {
-                next = new TrieNode(letter);
+                next = new TrieNode();
                 node.children.put(letter, next);
             }
             node = next;
         }
-        node.isLeaf = true;
+        node.word = str;
     }
 
     public short contains(char[] buffer, int len) {
@@ -62,7 +59,7 @@ public class Trie {
         }
 
         short result = 0;
-        if (node.isLeaf) {
+        if (node.word != null) {
             result |= IS_WORD;
         }
 
@@ -85,7 +82,7 @@ public class Trie {
         }
 
         short result = 0;
-        if (node.isLeaf) {
+        if (node.word != null) {
             result |= IS_WORD;
         }
 
@@ -93,5 +90,9 @@ public class Trie {
             result |= IS_PREFIX;
         }
         return result;
+    }
+
+    public TrieNode getRoot() {
+        return this.root;
     }
 }
